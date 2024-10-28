@@ -32,6 +32,7 @@ from opentelemetry import trace
 # You can install it with command "pip install opentelemetry-sdk".
 #from opentelemetry.sdk.trace import TracerProvider
 #from opentelemetry.sdk.trace.export import SimpleSpanProcessor, ConsoleSpanExporter
+#from opentelemetry.sdk.trace.export import BatchSpanProcessor
 from azure.ai.inference import ChatCompletionsClient
 from azure.ai.inference.models import SystemMessage, UserMessage, CompletionsFinishReason
 from azure.core.credentials import AzureKeyCredential
@@ -47,6 +48,15 @@ settings.tracing_implementation = "opentelemetry"
 #trace.set_tracer_provider(TracerProvider())
 #tracer = trace.get_tracer(__name__)
 #trace.get_tracer_provider().add_span_processor(SimpleSpanProcessor(exporter))
+
+# Setup tracing to Application Insights
+# Requires opentelemetry-sdk
+# from azure.monitor.opentelemetry.exporter import AzureMonitorTraceExporter
+# trace.set_tracer_provider(TracerProvider())
+# tracer = trace.get_tracer(__name__)
+# azure_exporter = AzureMonitorTraceExporter.from_connection_string("InstrumentationKey") 
+# span_processor = BatchSpanProcessor(azure_exporter) 
+# trace.get_tracer_provider().add_span_processor(span_processor) 
 
 
  # [START trace_function]
